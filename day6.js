@@ -1,18 +1,4 @@
-const data = `abc
-
-a
-b
-c
-
-ab
-ac
-
-a
-a
-a
-a
-
-b`
+const data = ``
 
 // Task1
 const anyAnswers = data
@@ -23,24 +9,13 @@ const anyAnswers = data
 console.log(anyAnswers)
 
 // Task2
+function listsIntersection ([fst, ...rest]) {
+  return fst.filter(x => rest.every(r => r.includes(x)))
+}
+
 const allAnswers = data
-  .split('\n\n')           // ['a', 'ab\nb']
-  .map(x => x.split('\n')) // [['a'], ['ab', 'b']]
-  .map(answers => {
-    const occurs = {}
-    const letters = answers.join('').split('') // 'abb'
-    letters.map(l => {
-      if (occurs[l]) {
-        occurs[l] += 1
-      } else {
-        occurs[l] = 1
-      }
-    })
-    const entries = Object.entries(occurs)
-    return entries
-      .filter(([letter, occur]) => occur === answers.length)
-      .map(([letter, occur]) => letter)
-      .length
-  })
+  .split('\n\n')                                  // ['a', 'ab\nb']
+  .map(x => x.split('\n').map(y => y.split('')))  // [['a'], ['ab', 'b']]
+  .map(answers => listsIntersection(answers).length)
   .reduce((x, y) => x + y, 0)
 console.log(allAnswers)

@@ -1,4 +1,4 @@
-const data = ``
+const data = ''
 
 const rows = data.split('\n')
 const steps1 = [
@@ -14,12 +14,11 @@ const steps2 = [
 
 function countTrees ([stepsRight, stepsDown]) {
   let treesMet = 0
-  let step = 0
   let positionRight = 0
 
   for (let i = 0; i < rows.length;) {
     let row = rows[i]
-    let repeats = Math.floor(positionRight / row.length) + 1
+    const repeats = Math.floor(positionRight / row.length) + 1
     // This could be reworked with a % division
     row = row.repeat(repeats)
     if (row[positionRight] === '#') {

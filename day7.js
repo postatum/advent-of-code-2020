@@ -1,4 +1,4 @@
-const data = ``
+const data = ''
 
 class TreeNode {
   constructor (name) {
@@ -46,16 +46,16 @@ function constructTree () {
     .split(' bags').join('')
     .split(' bag').join('')
   const rules = cleanData.split('\n')
-  rules.map(rule => {
+  rules.forEach(rule => {
     const [parentName, children] = rule.split(' contain ')
     const parentNode = nodesIndex[parentName] || new TreeNode(parentName)
     nodesIndex[parentName] = parentNode
     if (children.startsWith('no')) {
       return
     }
-    const childrenRules = children
+    children
       .split(',')
-      .map(rule => {
+      .forEach(rule => {
         let [qty, ...childName] = rule.trim().split(' ')
         childName = childName.join(' ')
         const childNode = nodesIndex[childName] || new TreeNode(childName)
@@ -89,7 +89,7 @@ function runTasks () {
   // Task1
   const index = constructTree()
   const names = new Set()
-  const matching = Object
+  Object
     .entries(index)
     .filter(([name, node]) => node.hasChild('shiny gold'))
     .forEach(([name, node]) => {

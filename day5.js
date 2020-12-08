@@ -1,4 +1,4 @@
-const data = ``
+const data = ''
 
 function calculateId ([rowCode, seatCode]) {
   return calculate(rowCode, 0, 127, 'B') * 8 + calculate(seatCode, 0, 7, 'R')
@@ -17,7 +17,7 @@ function calculate (code, min, max, incLetter) {
 }
 
 function tasks () {
-  const bpasses =  data.split('\n')
+  const bpasses = data.split('\n')
   const ids = bpasses
     .map(c => c.split(''))
     .map(c => [c.slice(0, 7), c.slice(7)])
@@ -30,7 +30,7 @@ function tasks () {
   const sortedIds = ids.sort((x, y) => x - y)
   const nearestMin = sortedIds.reduce(
     (acc, x) => x - acc >= 2 ? acc : x,
-    initialValue=sortedIds[0]
+    sortedIds[0]
   )
   console.log(nearestMin + 1)
 }

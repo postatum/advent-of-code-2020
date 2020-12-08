@@ -1,4 +1,4 @@
-const data = ``
+const data = ''
 
 function findValidPassports1 (inp) {
   const passports = inp.split('\n\n')
@@ -37,7 +37,7 @@ function validateEyr (obj) {
 }
 
 function validateHgt (obj) {
-  let hgt = obj.hgt
+  const hgt = obj.hgt
   if (hgt.endsWith('cm')) {
     const num = Number(hgt.replace('cm', ''))
     return num >= 150 && num <= 193
@@ -63,8 +63,8 @@ function validateEcl (obj) {
 }
 
 function validatePid (obj) {
-  let pid = obj.pid
-  return pid.length === 9 && Number(pid) !== NaN
+  const pid = obj.pid
+  return pid.length === 9 && isNaN(Number(pid))
 }
 
 const validators = [
@@ -84,7 +84,7 @@ function findValidPassports2 (inp) {
     if (keys < 7 || (keys === 7 && ps.includes('cid:'))) {
       return false
     }
-    psObj = Object.fromEntries(ps
+    const psObj = Object.fromEntries(ps
       .split('\n').join(' ')
       .split(' ').map(c => c.split(':')))
     return validators.every(v => v(psObj))

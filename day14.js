@@ -34,10 +34,8 @@ function applyMemoryAddrBitmask (memAddr, mask) {
     const variations = []
     maskedAddrs.forEach(addr => {
       const newAddr = addr.slice()
-      newAddr[i] = '0'
-      variations.push(newAddr.slice())
-      newAddr[i] = '1'
-      variations.push(newAddr.slice())
+      newAddr[i] = newAddr[i] === '0' ? '1' : '0'
+      variations.push(newAddr)
     })
     maskedAddrs.push(...variations)
   })

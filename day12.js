@@ -31,11 +31,15 @@ class MovableObject {
   }
 
   handleInstructionL (val) {
-    this.handleTurn(val, false)
+    // Turns left 90 & 270 are the same as turn right +180
+    if (val === 90 || val === 270) {
+      val += 180
+    }
+    this.handleTurn(val)
   }
 
   handleInstructionR (val) {
-    this.handleTurn(val, true)
+    this.handleTurn(val)
   }
 
   calculateManhattan () {
@@ -62,11 +66,7 @@ class DirectedShip extends Ship {
     this[`handleInstruction${this.directionFacing}`](val)
   }
 
-  handleTurn (val, isRight) {
-    // Turns left 90 & 270 are the same as turn right + 180
-    if ((val === 90 || val === 270) && !isRight) {
-      val += 180
-    }
+  handleTurn (val) {
     // All the turns are multiples of 90
     const sideTurns = val / 90
     const nextSideIndex = (
@@ -83,11 +83,7 @@ class Waypoint extends MovableObject {
     this.ship = ship
   }
 
-  handleTurn (val, isRight) {
-    // Turns left 90 & 270 are the same as turn right +180
-    if ((val === 90 || val === 270) && !isRight) {
-      val += 180
-    }
+  handleTurn (val) {
     let sideTurns = val / 90
     while (sideTurns > 0) {
       [this.x, this.y] = [this.y, this.x * -1]

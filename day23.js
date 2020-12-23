@@ -11,18 +11,10 @@ function shuffleCups(cups, moves) {
 
   while (moves > 0) {
     // 1. Pick-up cups
-    // const currIndex = cups.indexOf(current)
-    let currIndex = 0
-    let x = cups[currIndex]
-    while (x !== current) {
-      currIndex += 1
-      x = cups[currIndex]
-    }
-
+    const currIndex = cups.indexOf(current)
     pickUp = cups.splice(currIndex + 1, pickUpSize)
     if (pickUp.length < pickUpSize) { // Wrap around
-      pickUp = [...pickUp, ...cups.splice(0, pickUpSize - pickUp.length)]
-      // pickUp.push(...cups.splice(0, pickUpSize - pickUp.length))
+      pickUp.push(...cups.splice(0, pickUpSize - pickUp.length))
     }
     // 2. Select destination cup
     destination = cups.filter(c => c < current).sort().pop()
@@ -32,16 +24,14 @@ function shuffleCups(cups, moves) {
     // 3. Place picked-up cups after destination
     const destIndex = cups.indexOf(destination)
     const cupsTail = cups.splice(destIndex + 1, Infinity)
-    cups = [...cups, ...pickUp, ...cupsTail]
-    // cups.push(...pickUp)
-    // cups.push(...cupsTail)
+    cups.push(...pickUp, ...cupsTail)
     // 4. Select new current cup
     current = cups[(cups.indexOf(current) + 1) % cups.length]
     moves -= 1
   }
 
   // Restructure cups
-  const cupsTail = cups.splice(cups.indexOf(1), 99)
+  const cupsTail = cups.splice(cups.indexOf(1), Infinity)
 
   /* Metrics start */
   const end = new Date() - start,
